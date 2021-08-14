@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::apiResource("tel", "TelController");
+// Route::apiResource("tel", "TelController");
 // Route::get('/user',function(){
 //     return "Hi Postman";
 // });
+
+Route::apiResource('/employee','EmployeeController');

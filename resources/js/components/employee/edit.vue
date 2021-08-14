@@ -1,9 +1,12 @@
+ 
+
 <template>
   
-<div>
+  <div>
 
  <div class="row">
   <router-link to="/employee" class="btn btn-primary">All Employee </router-link>
+   
  </div>
 
 
@@ -16,18 +19,18 @@
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Add Employee</h1>
+                    <h1 class="h4 text-gray-900 mb-4"> Employee Update</h1>
                   </div>
 
-      <form class="user" @submit.prevent="employeeInsert" enctype="multipart/form-data">
+      <form class="user" @submit.prevent="employeeUpdate" enctype="multipart/form-data">
 
         <div class="form-group">
 
-        <div class="form-row">
-          <div class="col-md-6">
-            <input type="text" class="form-control" id="exampleInputFirstName" placeholder="Enter Your Full Name" v-model="form.name">
-            <small class="text-danger" v-if="errors.name"> {{ errors.name[0] }} </small>
-          </div>
+          <div class="form-row">
+            <div class="col-md-6">
+         <input type="text" class="form-control" id="exampleInputFirstName" placeholder="Enter Your Full Name" v-model="form.name">
+       <small class="text-danger" v-if="errors.name"> {{ errors.name[0] }} </small>
+            </div>
 
 
      <div class="col-md-6">
@@ -118,7 +121,7 @@
 
 
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+          <button type="submit" class="btn btn-primary btn-block">Update</button>
         </div>
         
       </form>
@@ -155,17 +158,24 @@
     data(){
     return {
       form:{
-        name: null,
-        email: null,
-        phone: null,
-        sallery: null,
-        address: null,
-        photo: null,
-        nid: null,
-        joining_date: null
+        name: '',
+        email: '',
+        phone: '',
+        sallery: '',
+        address: '',
+        photo: '',
+        newphoto: '',
+        nid: '',
+        joining_date: ''
       },
       errors:{}
     }
+  },
+  created(){
+  	let id = this.$route.params.id
+  	axios.get('/api/employee/'+id)
+  	.then(({data}) => (this.form = data))
+  	.catch(console.log('error'))
   },
 
   methods:{
@@ -176,15 +186,16 @@
      }else{
       let reader = new FileReader();
       reader.onload = event =>{
-        this.form.photo = event.target.result
-        console.log(event.target.result);
+        this.form.newphoto = event.target.result
+       
       };
       reader.readAsDataURL(file);
      }
 
     },
-  employeeInsert(){
-       axios.post('/api/employee',this.form)
+  employeeUpdate(){
+  	  let id = this.$route.params.id
+       axios.patch('/api/employee/'+id,this.form)
        .then(() => {
         this.$router.push({ name: 'employee'})
         Notification.success()

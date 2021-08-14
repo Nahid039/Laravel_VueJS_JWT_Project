@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
     <div class="row justify-content-center">
       <div class="col-xl-10 col-lg-12 col-md-9">
         <div class="card shadow-sm my-5">
@@ -8,7 +8,7 @@
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Login Form</h1>
                   </div>
                   <form class="user">
                     <div class="form-group">
@@ -33,6 +33,7 @@
                   <hr>
                   <div class="text-center">
                     <router-link to="/register" class="font-weight-bold small">Create an Account!</router-link>
+                    <router-link to="/forget" class="font-weight-bold small">Forget Password</router-link>
                   </div>
                   <div class="text-center">
                   </div>
@@ -43,7 +44,7 @@
         </div>
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
