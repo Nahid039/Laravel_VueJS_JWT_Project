@@ -13,16 +13,18 @@
                   <form class="user" @submit.prevent="login">
                     <div class="form-group">
                       <input type="email" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                        placeholder="Enter Email Address" v-model="form.email">
+                      placeholder="Enter Email Address" v-model="form.email">
+                      <small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
                     </div>
                     <div class="form-group">
-                      <input type="password" name="password" class="form-control" id="exampleInputPassword" placeholder="Password" v-model="form.password">
+                      <input type="password" name="password" class="form-control" id="exampleInputPassword"     placeholder="Password" v-model="form.password">
+                      <small class="text-danger" v-if="errors.password">{{ errors.password[0] }}</small>
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
                         <label class="custom-control-label" for="customCheck">Remember
-                          Me</label>
+                        Me</label>
                       </div>
                     </div>
                     <div class="form-group">
@@ -36,8 +38,6 @@
                   </div>
                   <div class="text-center">
                     <router-link to="/forget" class="font-weight-bold small">Forget Password</router-link>
-                  </div>
-                  <div class="text-center">
                   </div>
                 </div>
               </div>
@@ -61,7 +61,8 @@
           form:{
             email: null,
             password: null
-          }
+          },
+          errors:{}
         }
       },
       methods: {
@@ -69,9 +70,22 @@
           axios.post('/api/auth/login', this.form)
           .then(res => {
             User.reponseAfterLogin(res);
-            this.$router.push({ name: 'home' })
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Signed in successfully'
+            });
+
+            this.$router.push({ name: 'home' });
           })
-          .catch(error => console.log(error.response.data))
+          .catch(error => {
+            this.errors = error.response.data.errors;
+            // console.log(error.response.data);
+            Toast.fire({
+              icon: 'warning',
+              title: 'Invalid Email or Password'
+            });
+          })
         }
       },
     }
