@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +23,15 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/user',function(){
 //     return "Hi Postman";
 // });
+
+Route::group(['prefix' => 'auth'], function ($router) {
+
+    $router->post('login', [AuthController::class, 'login']);
+    $router->post('signup', [AuthController::class, 'signup']);
+    $router->post('logout', [AuthController::class, 'logout']);
+    $router->post('refresh', [AuthController::class, 'refresh']);
+    $router->post('me', [AuthController::class, 'me']);
+
+});
 
 Route::apiResource('/employee','EmployeeController');

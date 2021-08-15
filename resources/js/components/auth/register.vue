@@ -12,24 +12,17 @@
                     </div>
                     <form>
                         <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" class="form-control" id="exampleInputFirstName" placeholder="Enter First Name">
+                        <input type="text" class="form-control" id="exampleInputName" placeholder="Enter Full Name">
                         </div>
+                        
                         <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" class="form-control" id="exampleInputLastName" placeholder="Enter Last Name">
-                        </div>
-                        <div class="form-group">
-                        <label>Email</label>
                         <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
                             placeholder="Enter Email Address">
                         </div>
                         <div class="form-group">
-                        <label>Password</label>
                         <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
                         </div>
                         <div class="form-group">
-                        <label>Repeat Password</label>
                         <input type="password" class="form-control" id="exampleInputPasswordRepeat"
                             placeholder="Repeat Password">
                         </div>
